@@ -53,11 +53,19 @@ $(function() {
   plugins = [
     // plugin for integrating save button
     function(viewModel) {
+      window.viewModel = viewModel;
       var saveCmd = {
         name: 'Save', // l10n happens in the template
         enabled: ko.observable(true)
       };
 
+      $.get(getParameterByName('show_url')+ '.json')
+      .done(function(message) {
+        if (message.content) {
+          viewModel.importJSON(message.content);
+        }
+      });
+      
       saveCmd.execute = function() {
         saveCmd.enabled(false);
         var postData = {
@@ -84,7 +92,6 @@ $(function() {
         });
 
     };
-
       viewModel.save = saveCmd;
     },
   ];
