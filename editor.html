@@ -30,14 +30,65 @@ $(function() {
     alert('Update your browser!');
     return;
   }
+
+  var getParameterByName = function(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
   // var basePath = window.location.href.substr(0, window.location.href.lastIndexOf('/')).substr(window.location.href.indexOf('/','https://'.length));
   var basePath = window.location.href;
   if (basePath.lastIndexOf('#') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('#'));
   if (basePath.lastIndexOf('?') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('?'));
   if (basePath.lastIndexOf('/') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('/'));
-  var plugins;
+  // var plugins;
   // A basic plugin that expose the "viewModel" object as a global variable.
   // plugins = [function(vm) {window.viewModel = vm;}];
+  var plugins;
+  plugins = [
+    // plugin for integrating save button
+    function(viewModel) {
+      var saveCmd = {
+        name: 'Save', // l10n happens in the template
+        enabled: ko.observable(true)
+      };
+
+      saveCmd.execute = function() {
+        saveCmd.enabled(false);
+        var postData = {
+          metadata: viewModel.exportMetadata(),
+          content: viewModel.exportJSON(),
+          html: viewModel.exportHTML()
+        };
+
+        $.ajax({
+          type: "PUT",
+          url: getParameterByName('update_url') + '.json',
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: {message: postData},
+          success: function(data){
+            viewModel.notifier.success(viewModel.t('Successfully saved.'));
+            window.location = getParameterByName('callback_url');
+          },
+          failure: function(errMsg) {
+            viewModel.notifier.error(viewModel.t('Saving failed. Please try again in a few moment or contact us.'));
+          },
+          complete: function(){
+            saveCmd.enabled(true);
+          }
+        });
+
+    };
+
+      viewModel.save = saveCmd;
+    },
+  ];
+
   var ok = Mosaico.init({
     imgProcessorBackend: basePath+'/img/',
     emailProcessorBackend: basePath+'/dl/',
@@ -53,7 +104,7 @@ $(function() {
   }
 });
     </script>
-    
+
     <link rel="stylesheet" href="dist/mosaico-material.min.css?v=0.10" />
     <link rel="stylesheet" href="dist/vendor/notoregular/stylesheet.css" />
     <link rel="stylesheet" href="dist/vendor/evol.colorpicker.min.css" /> <!-- 2k -->

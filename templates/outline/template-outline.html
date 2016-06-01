@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <style type="text/css">
+        @supports -ko-blockdefs {
+            text { label: Paragraph; widget: text }
+            url { label: Link; widget: url }
+            src { label: Image; widget: src }
+            alt {
+              label: Alternative Text;
+              widget: text;
+              help: Alternative text will be shown on email clients that does not download image automatically;
+            }
+            image { label: Image; properties: src url alt }
+            listsize {
+                widget: select;
+                options: 1 | 2 | 3;
+            }
+
+            color {
+                widget: color;
+            }
+            visible { label: Visible?; widget: boolean }
+            buttonVisible { label: Show Button; extend: visible; }
+            link { label: Link; properties: text url }
+            buttonLink { label: Button; extend: link }
+            headerBlock imagePos {label:Image position; widget:select; options: left=Left|center=Center|right=Right; }
+            headerBlock {label: Header; properties: image imagePos=right; variant:imagePos;}
+            headerFull imagePos {label:Image position; widget:select; options: left=Left|center=Center|right=Right; }
+            headerFull {label: Header; properties: image imagePos=right; variant:imagePos;}
+            heroBlock { label: Its heroBlock; properties: buttonVisible=true buttonLink; }
+        }
+    </style>
+</head>
+
+<body >
+
+<div data-ko-container="main" data-ko-wrap="false">
+
+    <div data-ko-block="HeaderAndText">
+        <h1 data-ko-editable="headerText">this is header</h1>
+
+        <div data-ko-editable="bodyText">
+            this is text
+        </div>
+    </div>
+
+
+    <div data-ko-block="fixedlist" style="background-color: #f0f0f0; -ko-background-color: @color;">
+        <h1 data-ko-editable="headerText">fixed size list</h1>
+
+        <ul>
+            <li>
+                <div data-ko-editable="firstBodyText">item 1</div>
+            </li>
+            <li data-ko-display="listsize gt 1 ">
+                <div data-ko-editable="secondBodyText">item 2</div>
+            </li>
+            <li data-ko-display="listsize gt 2">
+                <div data-ko-editable="thirdBodyText"></div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <table data-ko-block="headerBlock" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+          <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td style="padding: 16px 16px 16px 16px; -ko-attr-align: @imagePos;" valign="top">
+                <a data-ko-link="image.url" href="http://outlinemail.co.uk">
+                  <img data-ko-editable="image.src" style="display: block" src="http://outlinemail.co.uk/img/logo.png" width="280" height="28" border="0" alt="Outline Mail">
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- /Header -->
+
+    <!-- Header full -->
+    <table data-ko-block="headerFull" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td bgcolor="#38a1d6" align="center">
+          <table style="min-width: 320px;" class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td style="padding: 16px 16px 16px 16px; -ko-attr-align: @imagePos;" valign="top">
+                <a href="http://outlinemail.co.uk">
+                  <img data-ko-editable="image.src" style="display: block" src="http://outlinemail.co.uk/img/logo-white.png" width="280" height="28" border="0" alt="Outline Mail">
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- /Header full -->
+
+    <!-- Hero title, text, cta -->
+<table data-ko-block="heroBlock" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td style="padding: 32px 0 32px 0;" bgcolor="#ffffff" align="center">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center">
+            <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+              <tr>
+                <td style="padding: 0 16px 0 16px;" align="center" valign="top">
+                  <!-- content -->
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td data-ko-editable="headerOfHeroBlockText" align="left" style="padding: 0 0 8px 0; color: #16f4d0; font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; line-height: 32px;">
+                        The clean &amp; simple framework
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-ko-editable="contentOfHeroBlockText" align="left" style="padding: 0 0 16px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 24px;">
+                        Outline is simple CSS starter boilerplate for any new web project. It's a modular, mobile-first framework which includes todays best practices for responsive design and core components I use on every project. Outline is designed to be a starting point. A solid foundation for your project, leaving the creativity up to you.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <!-- Button -->
+                        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                          <tr>
+                            <td align="left">
+                              <table border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td align="center">
+                                    <a data-ko-editable="buttonLink.text"
+                                       data-ko-display="buttonVisible"
+                                       style="background-color: #fcee21; border-top: 8px solid #fcee21;
+                                              border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21;
+                                              border-left: 16px solid #fcee21; display: inline-block;
+                                              color: #333333; font-family: Helvetica, Arial, sans-serif;
+                                              font-size: 18px; font-weight: normal; line-height: 24px;
+                                              text-decoration: none; -ko-attr-href: @buttonLink.url">Get started &#8594;</a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <!-- /Button -->
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /Hero title, text, cta -->
+
+</div>
+
+
+</body>
+</html>
