@@ -16,23 +16,27 @@
               help: Alternative text will be shown on email clients that does not download image automatically;
             }
             image { label: Image; properties: src url alt }
-            listsize {
-                widget: select;
-                options: 1 | 2 | 3;
-            }
-
             color {
                 widget: color;
             }
             visible { label: Visible?; widget: boolean }
             buttonVisible { label: Show Button; extend: visible; }
+            imageVisible { label: Show Image; extend: visible; }
             link { label: Link; properties: text url }
             buttonLink { label: Button; extend: link }
             headerBlock imagePos {label:Image position; widget:select; options: left=Left|center=Center|right=Right; }
             headerBlock {label: Header; properties: image imagePos=right; variant:imagePos;}
             headerFull imagePos {label:Image position; widget:select; options: left=Left|center=Center|right=Right; }
             headerFull {label: Header; properties: image imagePos=right; variant:imagePos;}
-            heroBlock { label: Its heroBlock; properties: buttonVisible=true buttonLink; }
+            headerText imagePos {label:Logo position; widget:select; options: left=Left|center=Center|right=Right; }
+            headerText {label: Header position; properties: imagePos=right; variant:imagePos;}
+            heroBlock align {label:Elements align; widget:select; options: left=Left|center=Center; }
+            heroBlock { label: Its heroBlock; properties: image buttonVisible=true imageVisible=true buttonLink align=left; }
+            listBlock listSize {label:Elements align; widget: select; options: 1 | 2 | 3 | 4;}
+            listBlock el1 author, listBlock el2 author, listBlock el3 author, listBlock el4 author {label: Author; widget: text;}
+            listBlock el1, listBlock el2, listBlock el3, listBlock el4 {label: List element; properties: author link;}
+            listBlock showBullets {label: Show Bullets; extend: visible;}
+            listBlock {label: List; properties: el1 el2 el3 el4 showBullets=true;}
         }
     </style>
 </head>
@@ -41,30 +45,6 @@
 
 <div data-ko-container="main" data-ko-wrap="false">
 
-    <div data-ko-block="HeaderAndText">
-        <h1 data-ko-editable="headerText">this is header</h1>
-
-        <div data-ko-editable="bodyText">
-            this is text
-        </div>
-    </div>
-
-
-    <div data-ko-block="fixedlist" style="background-color: #f0f0f0; -ko-background-color: @color;">
-        <h1 data-ko-editable="headerText">fixed size list</h1>
-
-        <ul>
-            <li>
-                <div data-ko-editable="firstBodyText">item 1</div>
-            </li>
-            <li data-ko-display="listsize gt 1 ">
-                <div data-ko-editable="secondBodyText">item 2</div>
-            </li>
-            <li data-ko-display="listsize gt 2">
-                <div data-ko-editable="thirdBodyText"></div>
-            </li>
-        </ul>
-    </div>
 
     <!-- Header -->
     <table data-ko-block="headerBlock" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -102,6 +82,22 @@
     </table>
     <!-- /Header full -->
 
+    <!-- Header text -->
+<table data-ko-block="headerText" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="center">
+      <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+          <td data-ko-editable="headerLogoText" style="padding: 16px 16px 16px 16px; font-size: 48px; font-family: Helvetica, Arial, sans-serif; color: #a1acb5; line-height: 1; -ko-attr-align: @imagePos;" valign="top">
+            Outline Mail
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /Header text -->
+
     <!-- Hero title, text, cta -->
 <table data-ko-block="heroBlock" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
@@ -114,13 +110,20 @@
                 <td style="padding: 0 16px 0 16px;" align="center" valign="top">
                   <!-- content -->
                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr data-ko-display="imageVisible">
+                      <td style="padding: 0 0 16px 0;" align="left">
+                        <a data-ko-link="image.url" target="_blank">
+                          <img style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 600px; height: 250px;" data-ko-editable="image.src" class="img-max" src="http://outlinemail.co.uk/img/16x9-img-placeholder.png" alt="Outline Mail" width="600" height="250" border="0">
+                        </a>
+                      </td>
+                    </tr>
                     <tr>
-                      <td data-ko-editable="headerOfHeroBlockText" align="left" style="padding: 0 0 8px 0; color: #16f4d0; font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; line-height: 32px;">
+                      <td data-ko-editable="headerOfHeroBlockText" style="padding: 0 0 8px 0; color: #16f4d0; font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; line-height: 32px; -ko-attr-align: @align;">
                         The clean &amp; simple framework
                       </td>
                     </tr>
                     <tr>
-                      <td data-ko-editable="contentOfHeroBlockText" align="left" style="padding: 0 0 16px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 24px;">
+                      <td data-ko-editable="contentOfHeroBlockText" style="padding: 0 0 16px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 24px; -ko-attr-align: @align;">
                         Outline is simple CSS starter boilerplate for any new web project. It's a modular, mobile-first framework which includes todays best practices for responsive design and core components I use on every project. Outline is designed to be a starting point. A solid foundation for your project, leaving the creativity up to you.
                       </td>
                     </tr>
@@ -129,7 +132,7 @@
                         <!-- Button -->
                         <table border="0" cellspacing="0" cellpadding="0" width="100%">
                           <tr>
-                            <td align="left">
+                            <td style="-ko-attr-align: @align;">
                               <table border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td align="center">
@@ -161,6 +164,139 @@
   </tr>
 </table>
 <!-- /Hero title, text, cta -->
+
+<!-- List image title author -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="listBlock">
+  <tr>
+    <td style="padding: 32px 0 32px 0;" bgcolor="#ffffff" align="center">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center">
+            <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+              <tr>
+                <td style="padding: 0 16px 0 16px;" align="center" valign="top">
+                  <!-- content -->
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td data-ko-editable="titleOfListText" align="left" style="padding: 0 0 16px 0; color: #16f4d0; font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; line-height: 32px;">
+                        Amazing Articles
+                      </td>
+                    </tr>
+                    <!-- list item 1 -->
+                    <tr>
+                      <td style="padding: 24px 0 24px 0; border-top: 1px solid #dce8ef;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="left" valign="top" data-ko-display="showBullets">
+                              <img style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 40px; height: 40px;" src="http://outlinemail.co.uk/img/min/circle-img-placeholder.jpg" alt="Outline Mail" width="40" height="40" border="0">
+                            </td>
+                            <td align="left" style="padding-left: 4px;" valign="top">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td align="left" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;">
+                                    <a href="" style="color: #333333; text-decoration: none;" data-ko-link="el1.link.url" data-ko-editable="el1LinkText">Outline Mail - Making HTML email ridiculously easy.</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-ko-editable="el1.author" align="left" style="color: #dce8ef; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; text-transform: uppercase;" colspan="2">
+                                      MATT HARRIS
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <!-- list item 2 -->
+                    <tr data-ko-display="listSize gt 1">
+                      <td style="padding: 24px 0 24px 0; border-top: 1px solid #dce8ef;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="left" valign="top" data-ko-display="showBullets">
+                              <img style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 40px; height: 40px;" src="http://outlinemail.co.uk/img/min/circle-img-placeholder.jpg" alt="Outline Mail" width="40" height="40" border="0">
+                            </td>
+                            <td align="left" style="padding-left: 4px;" valign="top">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td align="left" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;">
+                                    <a style="color: #333333; text-decoration: none;" data-ko-link="el2.link.url" data-ko-editable="el2LinkText">Outline Mail - Making HTML email ridiculously easy.</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" style="color: #dce8ef; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; text-transform: uppercase;" colspan="2">
+                                      MATT HARRIS
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <!-- list item 3 -->
+                    <tr data-ko-display="listSize gt 2">
+                      <td style="padding: 24px 0 24px 0; border-top: 1px solid #dce8ef;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="left" valign="top" data-ko-display="showBullets">
+                              <img style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 40px; height: 40px;" src="http://outlinemail.co.uk/img/min/circle-img-placeholder.jpg" alt="Outline Mail" width="40" height="40" border="0">
+                            </td>
+                            <td align="left" style="padding-left: 4px;" valign="top">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td align="left" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;">
+                                    <a style="color: #333333; text-decoration: none;" data-ko-link="el3.link.url" data-ko-editable="el3LinkText">Outline Mail - Making HTML email ridiculously easy.</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" style="color: #dce8ef; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; text-transform: uppercase;" colspan="2">
+                                      MATT HARRIS
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <!-- list item 4 -->
+                    <tr data-ko-display="listSize gt 3">
+                      <td style="padding: 24px 0 24px 0; border-top: 1px solid #dce8ef;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="left" valign="top" data-ko-display="showBullets">
+                              <img style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 40px; height: 40px;" src="http://outlinemail.co.uk/img/min/circle-img-placeholder.jpg" alt="Outline Mail" width="40" height="40" border="0">
+                            </td>
+                            <td align="left" style="padding-left: 4px;" valign="top">
+                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                  <td align="left" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;">
+                                    <a style="color: #333333; text-decoration: none;" data-ko-link="el4.link.url" data-ko-editable="el4LinkText">Outline Mail - Making HTML email ridiculously easy.</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" style="color: #dce8ef; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; text-transform: uppercase;" colspan="2">
+                                      MATT HARRIS
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /List image title author -->
 
 </div>
 
