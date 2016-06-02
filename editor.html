@@ -59,13 +59,21 @@ $(function() {
         enabled: ko.observable(true)
       };
 
-      $.get(getParameterByName('show_url')+ '.json')
-      .done(function(message) {
-        if (message.content) {
-          viewModel.importJSON(message.content);
+      // Fetch message content from backend
+      $.ajax({
+        type: "GET",
+        url: getParameterByName('update_url'),
+        // The key needs to match your method's input parameter (case-sensitive).
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader ("Authorization", "Basic " + btoa(getParameterByName('api_key') + ":" ));
+        },
+        success: function(message){
+          if (message.content) {
+            viewModel.importJSON(message.content);
+          }
         }
       });
-      
+
       saveCmd.execute = function() {
         saveCmd.enabled(false);
         var postData = {
@@ -74,11 +82,15 @@ $(function() {
           html: viewModel.exportHTML()
         };
 
+        // Update message content on backend
         $.ajax({
           type: "PUT",
-          url: getParameterByName('update_url') + '.json',
+          url: getParameterByName('update_url'),
           // The key needs to match your method's input parameter (case-sensitive).
           data: {message: postData},
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Basic " + btoa(getParameterByName('api_key') + ":" ));
+          },
           success: function(data){
             viewModel.notifier.success(viewModel.t('Successfully saved.'));
             window.location = getParameterByName('callback_url');
