@@ -55,6 +55,7 @@
             galleryFourUpBlock col1, galleryFourUpBlock col2, galleryFourUpBlock col3, galleryFourUpBlock col4 {label: Column; properties: title image button;}
             galleryFourUpBlock {label: Four column text; properties: col1 col2 col3 col4 showButtons=true;}
             articleBlock {label: One column text; properties: showButtons=true;}
+            footerBlock {label: Footer; properties: align=left;}
         }
     </style>
 </head>
@@ -1188,6 +1189,43 @@
   </tr>
 </table>
 <!-- /Article -->
+
+
+<!-- footer -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="footerBlock">
+  <tr>
+    <td style="padding: 32px 0 0 0;" align="center">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center">
+            <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+              <tr>
+                <td style="padding: 16px 16px 16px 16px;" align="center" valign="top">
+                  <!-- content -->
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td data-ko-editable="firstFooterText" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; -ko-attr-align: @align;">
+                        Outline Mail is a project by <a style="color: #38A1D6; text-decoration: none;" href="http://www.matt-harris.net">Matt Harris</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-ko-editable="secondFooterText" style="color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 21px; -ko-attr-align: @align;">
+                        <a style="color: #38A1D6; text-decoration: none;" href="#">View this email in your browser</a> | <a style="color: #38A1D6; text-decoration: none;" href="{{unsubscribe_url}}">Unsubscribe</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /footer -->
+
+
 
 </div>
 
