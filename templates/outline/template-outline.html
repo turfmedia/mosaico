@@ -16,9 +16,7 @@
               help: Alternative text will be shown on email clients that does not download image automatically;
             }
             image { label: Image; properties: src url alt }
-            color {
-                widget: color;
-            }
+            color {label: Color; widget: color;}
             button {label: Button; extend: link;}
             title {label: Title; properties: text;}
             visible { label: Visible?; widget: boolean }
@@ -29,6 +27,7 @@
             showButtons {label: Show buttons; extend: visible;}
             link { label: Link; properties: text url }
             align {label: Align; widget:select; options: left=Left|center=Center|right=Right; }
+            externalBackgroundColor { label: External Background; extend: color }
             buttonLink { label: Button; extend: link }
             headerBlock imagePos {label:Image position; widget:select; options: left=Left|center=Center|right=Right; }
             headerBlock {label: Header; properties: image imagePos=right; variant:imagePos;}
@@ -56,6 +55,8 @@
             galleryFourUpBlock {label: Four column text; properties: col1 col2 col3 col4 showButtons=true;}
             articleBlock {label: One column text; properties: showButtons=true;}
             footerBlock {label: Footer; properties: align=left;}
+            footerFullBlock {label: Footer full; properties: align=left externalBackgroundColor;}
+            footerFullBlock:preview{}
         }
     </style>
 </head>
@@ -497,7 +498,7 @@
                       <td>
                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                           <tr data-ko-display="showImages">
-                            <td tyle="-ko-attr-align: @align;">
+                            <td style="-ko-attr-align: @align;">
                               <a target="_blank" style="-ko-attr-href: @col2.button.url;">
                                 <img data-ko-editable="col2.image.src" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 272px; height: 153px;" class="img-max" src="http://outlinemail.co.uk/img/16x9-img-placeholder.png" alt="Outline Mail" width="272" height="153" border="0">
                               </a>
@@ -1190,14 +1191,13 @@
 </table>
 <!-- /Article -->
 
-
-<!-- footer -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="footerBlock">
+<!-- footer full -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="footerFullBlock">
   <tr>
     <td style="padding: 32px 0 0 0;" align="center">
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-          <td align="center">
+          <td style="-ko-attr-bgcolor: @externalBackgroundColor;" align="center">
             <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
               <tr>
                 <td style="padding: 16px 16px 16px 16px;" align="center" valign="top">
@@ -1223,7 +1223,7 @@
     </td>
   </tr>
 </table>
-<!-- /footer -->
+<!-- /footer full -->
 
 
 
