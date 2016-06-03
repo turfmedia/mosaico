@@ -47,13 +47,14 @@
             oneUpTextBlock col1 {label:Column 1; properties: text;}
             oneUpTextBlock {label: One column text; properties: col1;}
             twoUpTextBlock col1, twoUpTextBlock col2 {label: Column; properties: title text image button;}
-            twoUpTextBlock {label: One column text; properties: col1 col2 showTitle=true showImages=true showButtons=true align=left;}
+            twoUpTextBlock {label: Two column text; properties: col1 col2 showTitle=true showImages=true showButtons=true align=left;}
             threeUpTextBlock col1, threeUpTextBlock col2, threeUpTextBlock col3 {label: Column; properties: title text image button;}
-            threeUpTextBlock {label: One column text; properties: col1 col2 col3 showTitle=true showImages=true showButtons=true align=left;}
+            threeUpTextBlock {label: Three column text; properties: col1 col2 col3 showTitle=true showImages=true showButtons=true align=left;}
             fourUpTextBlock col1, fourUpTextBlock col2, fourUpTextBlock col3, fourUpTextBlock col4 {label: Column; properties: title text image button;}
-            fourUpTextBlock {label: One column text; properties: col1 col2 col3 col4 showTitle=true showImages=true showButtons=true align=left;}
+            fourUpTextBlock {label: Four column text; properties: col1 col2 col3 col4 showTitle=true showImages=true showButtons=true align=left;}
             galleryFourUpBlock col1, galleryFourUpBlock col2, galleryFourUpBlock col3, galleryFourUpBlock col4 {label: Column; properties: title image button;}
-            galleryFourUpBlock {label: One column text; properties: col1 col2 col3 col4 showButtons=true;}
+            galleryFourUpBlock {label: Four column text; properties: col1 col2 col3 col4 showButtons=true;}
+            articleBlock {label: One column text; properties: showButtons=true;}
         }
     </style>
 </head>
@@ -1115,7 +1116,78 @@
 </table>
 <!-- /Gallery four up centre -->
 
-
+<!-- Article -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="articleBlock">
+  <tr>
+    <td style="padding: 32px 0 0 0;" bgcolor="#ffffff" align="center">
+      <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+          <td style="padding: 0 16px 0 16px;" align="center" valign="top">
+            <!-- Two column -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td>
+                  <!-- content left -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="28%" align="left">
+                    <tr>
+                      <td align="center" valign="top">
+                        <a style="-ko-attr-href: @button.url;" target="_blank">
+                          <img data-ko-editable="image.src" style="display: block; padding: 0 0 8px 0; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 150px; height: 84px;" class="img-max" src="http://outlinemail.co.uk/img/16x9-img-placeholder.png" alt="Outline Mail" width="150" height="84" border="0">
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content left -->
+                  <!-- content right -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="70%" align="right">
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td data-ko-editable="articleTitleText" style="padding: 0 0 8px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;" align="left">
+                              A growing community for email professionals
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-ko-editable="articleDescriptionText" style="padding: 0 0 16px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 24px;" align="left">
+                              Share knowledge, ask code questions, and learn from a growing library of articles on all things email.
+                            </td>
+                          </tr>
+                          <tr data-ko-display="showButtons">
+                            <td style="padding: 0 0 32px 0;">
+                              <!-- Button -->
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td align="left">
+                                    <table class="mobile-button-wrap" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center">
+                                          <a class="mobile-button" data-ko-editable="articleButtonText" style="-ko-attr-href: @button.url; background-color: #fcee21; border-top: 8px solid #fcee21; border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21; border-left: 16px solid #fcee21; display: inline-block; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: normal; line-height: 24px; text-decoration: none;" href="http://outlinemail.co.uk" target="_blank">Get started &#8594;</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                              <!-- /Button -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content right -->
+                </td>
+              </tr>
+            </table>
+            <!-- /Two column -->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /Article -->
 
 </div>
 
