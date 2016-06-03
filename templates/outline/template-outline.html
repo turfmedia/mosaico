@@ -52,6 +52,8 @@
             threeUpTextBlock {label: One column text; properties: col1 col2 col3 showTitle=true showImages=true showButtons=true align=left;}
             fourUpTextBlock col1, fourUpTextBlock col2, fourUpTextBlock col3, fourUpTextBlock col4 {label: Column; properties: title text image button;}
             fourUpTextBlock {label: One column text; properties: col1 col2 col3 col4 showTitle=true showImages=true showButtons=true align=left;}
+            galleryFourUpBlock col1, galleryFourUpBlock col2, galleryFourUpBlock col3, galleryFourUpBlock col4 {label: Column; properties: title image button;}
+            galleryFourUpBlock {label: One column text; properties: col1 col2 col3 col4 showButtons=true;}
         }
     </style>
 </head>
@@ -920,6 +922,198 @@
   </tr>
 </table>
 <!-- /Four up button centre -->
+
+
+<!-- Gallery four up centre -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" data-ko-block="galleryFourUpBlock">
+  <tr>
+    <td style="padding: 32px 0 0 0;" bgcolor="#ffffff" align="center">
+      <table class="content-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+          <td style="padding: 0 16px 0 16px;" align="center" valign="top">
+            <!-- Two column -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td>
+                  <!-- content left -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="48%" align="left">
+                    <tr>
+                      <td>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="center">
+                              <a style="-ko-attr-href: @col1.button.url;" target="_blank">
+                                <img data-ko-editable="col1.image.src" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 250px; height: 354px;" class="img-max" src="http://outlinemail.co.uk/img/gallery-placeholder.png" alt="Outline Mail" width="250" height="354" border="0">
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-ko-editable="col1TitleText" style="padding: 8px 0 8px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;" align="center">
+                              What a lovely picture
+                            </td>
+                          </tr>
+                          <tr data-ko-display="showButtons">
+                            <td style="padding: 0 0 32px 0;">
+                              <!-- Button -->
+                              <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td align="center">
+                                    <table class="mobile-button-wrap" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center">
+                                          <a class="mobile-button" data-ko-editable="col1ButtonText" style="-ko-attr-href: @col1.button.url; background-color: #fcee21; border-top: 8px solid #fcee21; border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21; border-left: 16px solid #fcee21; display: inline-block; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: normal; line-height: 24px; text-decoration: none;" href="http://outlinemail.co.uk" target="_blank">Buy Now &#8594;</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                              <!-- /Button -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content left -->
+                  <!-- content right -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="48%" align="right">
+                    <tr>
+                      <td>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="center">
+                              <a style="-ko-attr-href: @col2.button.url;" target="_blank">
+                                <img data-ko-editable="col2.image.src" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 250px; height: 354px;" class="img-max" src="http://outlinemail.co.uk/img/gallery-placeholder.png" alt="Outline Mail" width="250" height="354" border="0">
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-ko-editable="col2TitleText" style="padding: 8px 0 8px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;" align="center">
+                              What a lovely picture
+                            </td>
+                          </tr>
+                          <tr data-ko-display="showButtons">
+                            <td style="padding: 0 0 32px 0;">
+                              <!-- Button -->
+                              <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td align="center">
+                                    <table class="mobile-button-wrap" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center">
+                                          <a class="mobile-button" data-ko-editable="col2ButtonText" style="-ko-attr-href: @col2.button.url; background-color: #fcee21; border-top: 8px solid #fcee21; border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21; border-left: 16px solid #fcee21; display: inline-block; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: normal; line-height: 24px; text-decoration: none;" href="http://outlinemail.co.uk" target="_blank">Buy Now &#8594;</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                              <!-- /Button -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content right -->
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <!-- content left -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="48%" align="left">
+                    <tr>
+                      <td>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="center">
+                              <a style="-ko-attr-href: @col3.button.url;" target="_blank">
+                                <img data-ko-editable="col3.image.src" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 250px; height: 354px;" class="img-max" src="http://outlinemail.co.uk/img/gallery-placeholder.png" alt="Outline Mail" width="250" height="354" border="0">
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-ko-editable="col3TitleText" style="padding: 8px 0 8px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;" align="center">
+                              What a lovely picture
+                            </td>
+                          </tr>
+                          <tr data-ko-display="showButtons">
+                            <td style="padding: 0 0 32px 0;">
+                              <!-- Button -->
+                              <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td align="center">
+                                    <table class="mobile-button-wrap" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center">
+                                          <a class="mobile-button" data-ko-editable="col3ButtonText" style="-ko-attr-href: @col3.button.url; background-color: #fcee21; border-top: 8px solid #fcee21; border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21; border-left: 16px solid #fcee21; display: inline-block; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: normal; line-height: 24px; text-decoration: none;" href="http://outlinemail.co.uk" target="_blank">Buy Now &#8594;</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                              <!-- /Button -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content left -->
+                  <!-- content right -->
+                  <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="48%" align="right">
+                    <tr>
+                      <td>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td align="center">
+                              <a style="-ko-attr-href: @col4.button.url;" target="_blank">
+                                <img data-ko-editable="col4.image.src" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #333333; font-size: 14px; width: 250px; height: 354px;" class="img-max" src="http://outlinemail.co.uk/img/gallery-placeholder.png" alt="Outline Mail" width="250" height="354" border="0">
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td data-ko-editable="col4TitleText" style="padding: 8px 0 8px 0; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: normal; line-height: 30px;" align="center">
+                              What a lovely picture
+                            </td>
+                          </tr>
+                          <tr data-ko-display="showButtons">
+                            <td style="padding: 0 0 32px 0;">
+                              <!-- Button -->
+                              <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td align="center">
+                                    <table class="mobile-button-wrap" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center">
+                                          <a class="mobile-button" data-ko-editable="col4ButtonText" style="-ko-attr-href: @col4.button.url; background-color: #fcee21; border-top: 8px solid #fcee21; border-right: 16px solid #fcee21; border-bottom: 8px solid #fcee21; border-left: 16px solid #fcee21; display: inline-block; color: #333333; font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: normal; line-height: 24px; text-decoration: none;" href="http://outlinemail.co.uk" target="_blank">Buy Now &#8594;</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                              <!-- /Button -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- /content right -->
+                </td>
+              </tr>
+            </table>
+            <!-- /Two column -->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /Gallery four up centre -->
 
 
 
