@@ -41,6 +41,10 @@ $(function() {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
+  var image_upload_url = function(){
+    return getParameterByName('image_url') + '?api_key='+ getParameterByName('api_key') + '&plain_auth=true';
+  }
+
   // var basePath = window.location.href.substr(0, window.location.href.lastIndexOf('/')).substr(window.location.href.indexOf('/','https://'.length));
   var basePath = window.location.href;
   if (basePath.lastIndexOf('#') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('#'));
@@ -113,8 +117,7 @@ $(function() {
     emailProcessorBackend: basePath+'/dl/',
     titleToken: "MOSAICO Responsive Email Designer",
     fileuploadConfig: {
-      url: 'http://localhost:6580/api/messages/cf051cb2fe6b48c2/message_images',//basePath+'/upload/',
-      // messages??
+      url: image_upload_url()
     }
   }, plugins);
   if (!ok) {
