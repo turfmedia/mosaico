@@ -80,5 +80,8 @@
     "postinstall": "bower-npm-install --non-interactive",
     "deps": "bower-npm-install --non-interactive",
     "test": "grunt jasmine_node"
+  },
+  "dependencies": {
+    "holderjs": "^2.9.3"
   }
 }

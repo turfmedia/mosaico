@@ -40,7 +40,7 @@ var applyBindingOptions = function(options, ko) {
   };
 
   ko.bindingHandlers.wysiwygSrc.placeholderUrl = function(width, height, text) {
-    return options.imgProcessorBackend + "?method=" + 'placeholder' + "&params=" + width + encodeURIComponent(",") + height;
+    return 'holder.js/' + width + 'x' + height;
   };
 
   // pushes custom tinymce configurations from options to the binding

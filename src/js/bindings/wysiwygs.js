@@ -5,6 +5,7 @@ var tinymce = require("tinymce");
 var $ = require("jquery");
 var ko = require("knockout");
 var console = require("console");
+var holderjs = require("holderjs");
 require("./eventable.js");
 
 ko.bindingHandlers.wysiwygOrHtml = {
@@ -20,7 +21,7 @@ ko.bindingHandlers.wysiwygOrHtml = {
     var isNotWysiwygMode = (typeof bindingContext.templateMode == 'undefined' || bindingContext.templateMode != 'wysiwyg');
     if (isNotWysiwygMode)
       return ko.bindingHandlers['virtualHtml'].update(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext);
-    //else 
+    //else
     //  return ko.bindingHandlers.wysiwyg.update(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext);
   }
 };
@@ -87,8 +88,11 @@ ko.bindingHandlers.wysiwygSrc = {
     var width = ko.utils.unwrapObservable(value.width);
     var height = ko.utils.unwrapObservable(value.height);
     if ((attrValue === false) || (attrValue === null) || (attrValue === undefined) || (attrValue === '')) {
-      if (typeof placeholderValue == 'object' && placeholderValue !== null) element.setAttribute('src', ko.bindingHandlers.wysiwygSrc.placeholderUrl(placeholderValue.width, placeholderValue.height, placeholderValue.text));
-      else element.removeAttribute('src');
+      if (typeof placeholderValue == 'object' && placeholderValue !== null) {
+        element.setAttribute('data-src', ko.bindingHandlers.wysiwygSrc.placeholderUrl(placeholderValue.width, placeholderValue.height, placeholderValue.text));
+        // Apply holderjs to element
+        holderjs.run({ images: element });
+      } else {element.removeAttribute('src');}
     } else {
       var method = ko.utils.unwrapObservable(value.method);
       if (!method) method = width > 0 && height > 0 ? 'cover' : 'resize';
@@ -176,7 +180,7 @@ ko.bindingHandlers.wysiwyg = {
     plugins: ["link hr paste lists textcolor code"],
     // valid_elements: 'strong/b,em/i,*[*]',
     // extended_valid_elements: 'strong/b,em/i,*[*]',
-    // Removed: image fullscreen contextmenu 
+    // Removed: image fullscreen contextmenu
     // download custom:
     // jquery version con legacyoutput, anchor, code, importcss, link, paste, textcolor, hr, lists
   },

@@ -189,6 +189,7 @@ module.exports = function(grunt) {
           'skins': 'tinymce/skins',
           'plugins': 'tinymce/plugins',
           'notoregular': 'webfont-notosans/regular',
+          'holderjs' : 'holderjs/holder.js'
         }
       },
       fontawesome: {
