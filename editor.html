@@ -28,21 +28,94 @@ $(function() {
     alert('Update your browser!');
     return;
   }
+
+  var getParameterByName = function(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  var image_upload_url = function(){
+    return getParameterByName('image_url') + '?api_key='+ getParameterByName('api_key') + '&plain_auth=true';
+  }
+
   // var basePath = window.location.href.substr(0, window.location.href.lastIndexOf('/')).substr(window.location.href.indexOf('/','https://'.length));
   var basePath = window.location.href;
   if (basePath.lastIndexOf('#') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('#'));
   if (basePath.lastIndexOf('?') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('?'));
   if (basePath.lastIndexOf('/') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('/'));
-  var plugins;
+  // var plugins;
   // A basic plugin that expose the "viewModel" object as a global variable.
   // plugins = [function(vm) {window.viewModel = vm;}];
+  var plugins;
+  plugins = [
+    // plugin for integrating save button
+    function(viewModel) {
+      window.viewModel = viewModel;
+      var saveCmd = {
+        name: 'Save', // l10n happens in the template
+        enabled: ko.observable(true)
+      };
+
+      // Fetch message content from backend
+      $.ajax({
+        type: "GET",
+        url: getParameterByName('update_url'),
+        // The key needs to match your method's input parameter (case-sensitive).
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader ("Authorization", "Basic " + btoa(getParameterByName('api_key') + ":" ));
+        },
+        success: function(message){
+          if (message.content) {
+            viewModel.importJSON(message.content);
+          }
+        }
+      });
+
+      saveCmd.execute = function() {
+        saveCmd.enabled(false);
+        var postData = {
+          metadata: viewModel.exportMetadata(),
+          content: viewModel.exportJSON(),
+          html: viewModel.exportHTML()
+        };
+
+        // Update message content on backend
+        $.ajax({
+          type: "PUT",
+          url: getParameterByName('update_url'),
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: {message: postData},
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Basic " + btoa(getParameterByName('api_key') + ":" ));
+          },
+          success: function(data){
+            viewModel.notifier.success(viewModel.t('Successfully saved.'));
+            window.location = getParameterByName('callback_url');
+          },
+          failure: function(errMsg) {
+            viewModel.notifier.error(viewModel.t('Saving failed. Please try again in a few moment or contact us.'));
+          },
+          complete: function(){
+            saveCmd.enabled(true);
+          }
+        });
+
+    };
+      viewModel.save = saveCmd;
+    },
+  ];
+
   var ok = Mosaico.init({
     imgProcessorBackend: basePath+'/img/',
     emailProcessorBackend: basePath+'/dl/',
     titleToken: "ComCenter Responsive Email Designer",
     fileuploadConfig: {
-      url: basePath+'/upload/',
-      // messages??
+      url: image_upload_url()
     }
   }, plugins);
   if (!ok) {
@@ -57,7 +130,5 @@ $(function() {
     <link rel="stylesheet" href="dist/vendor/evol.colorpicker.min.css" /> <!-- 2k -->
   </head>
   <body class="mo-standalone">
-
-
   </body>
 </html>
