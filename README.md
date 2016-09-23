@@ -87,3 +87,5 @@ if your problem is not with the building then when you open a GitHub issue:
 ### Contact Us
 
 Please contact us if you have ideas, suggestions or, even better, you want to collaborate on this project or you need COMMERCIAL support: info@mosaico.io . Please DON'T write to this email to get free support: use Git issues for that.
+
+22.09.16 Chrome mosaico with holder.js issue: Patched holder.js:4102, added else with retval = [];
