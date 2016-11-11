@@ -253,6 +253,7 @@ module.exports = function(grunt) {
           "dist/vendor/evol.colorpicker.min.js",
           "dist/vendor/tinymce.min.js",
           "dist/mosaico.min.js",
+          // "dist/editor.js", can't find this file here
         ],
         dest: 'dist/editor.min.js',
       },
