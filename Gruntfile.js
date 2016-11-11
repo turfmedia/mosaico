@@ -4,6 +4,7 @@ var path = require('path');
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('grunt-contrib-concat'); // https://github.com/gruntjs/grunt-contrib-concat#getting-started
 
   grunt.initConfig({
 
@@ -230,12 +231,38 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      options: {
+        process: true,
+        separator: ';\n',
+      },
+      js: {
+        src: [
+          "dist/vendor/jquery.min.js",
+          "dist/vendor/knockout.js",
+          "dist/vendor/jquery-ui.min.js",
+          "dist/vendor/jquery.ui.touch-punch.min.js",
+          "dist/vendor/load-image.all.min.js",
+          "dist/vendor/canvas-to-blob.min.js",
+          "dist/vendor/jquery.iframe-transport.js",
+          "dist/vendor/jquery.fileupload.js",
+          "dist/vendor/jquery.fileupload-process.js",
+          "dist/vendor/jquery.fileupload-image.js",
+          "dist/vendor/jquery.fileupload-validate.js",
+          "dist/vendor/knockout-jqueryui.min.js",
+          "dist/vendor/evol.colorpicker.min.js",
+          "dist/vendor/tinymce.min.js",
+          "dist/mosaico.min.js",
+        ],
+        dest: 'dist/editor.min.js',
+      },
+    }
   });
 
   grunt.registerTask('js', ['combineKOTemplates', 'browserify', 'exorcise']);
   grunt.registerTask('css', ['less', 'postcss']);
   grunt.registerTask('server', ['express', 'watch', 'express-keepalive']);
-  grunt.registerTask('build', ['bowercopy', 'copy', 'jshint', 'js', 'css']);
+  grunt.registerTask('build', ['bowercopy', 'copy', 'jshint', 'js', 'css', 'concat']);
   grunt.registerTask('default', ['build', 'server']);
   grunt.registerTask('test', ['jasmine_node']);
 };
