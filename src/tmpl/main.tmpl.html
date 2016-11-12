@@ -17,7 +17,7 @@
     <!-- /ko -->
 
     <span>
-    <input id="showGallery" type="checkbox" data-bind="checked: $root.showGallery, button: { refreshOn: $root.showGallery, 
+    <input id="showGallery" type="checkbox" data-bind="checked: $root.showGallery, button: { refreshOn: $root.showGallery,
     icons: { primary: 'fa fa-fw fa-picture-o', secondary: null }, text: true, label: $root.t('Gallery') }"><label title="Show image gallery" for="showGallery" data-bind="attr: { title: $root.t('Show image gallery') }">show gallery</label></input>
     </span>
 
@@ -41,6 +41,7 @@
     <!-- ko if: typeof $root.test !== 'undefined' -->
     <a title="Show preview and send test" href="javascript:void(0)" data-bind="attr: { title: $root.t('Show preview and send test') }, click: $root.test.execute, clickBubble: false, button: { disabled: !$root.test.enabled(), icons: { primary: 'fa fa-fw fa-paper-plane' }, label: $root.t($root.test.name), text: true }">TEST</a>
     <!-- /ko -->
+    <a title="Close editor" href="javascript:void(0)" data-bind="attr: { title: $root.t('Close editor') }, click: $root.close.execute, clickBubble: false, button: { disabled: !$root.close.enabled(), icons: { primary: 'fa fa-fw fa-times' }, label: $root.t($root.close.name), text: true }">CLOSE</a>
     <!-- ko if: typeof $root.download !== 'undefined' -->
     <form id="downloadForm" action="#" method="POST">
     <input type="hidden" name="action" value="download" />
@@ -57,7 +58,7 @@
     <div data-bind="template: { name: 'toolbox' }"></div>
   </div>
   <!-- /ko -->
-  
+
   <div id="main-preview" class="mo" data-bind="scrollable: true, if: $root.showPreviewFrame">
     <div id="preview-toolbar">
       <div data-bind="visible: $root.showPreviewFrame, buttonset: { }" style="display: inline-block">
