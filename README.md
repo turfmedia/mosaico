@@ -24,6 +24,8 @@ Subscribe to our newsletter to get updates: http://mosaico.voxmail.it/user/regis
 
 ### Build/Run  [![Build Status](https://travis-ci.org/voidlabs/mosaico.svg)](https://travis-ci.org/voidlabs/mosaico)
 
+You need NodeJS v6.0 or higher + ImageMagick
+
 this may raise warnings about Knockout, ignore them. It will probably fail on some colorpicker dependency, just run it again and will work:
 ```
   npm install
@@ -37,8 +39,7 @@ compile and run a local webserver (http://127.0.0.1:9006) with incremental build
   grunt
 ```
 *IMPORTANT* in order to use image uploading/processing feature in Node you need imageMagick installed in your environment.
-e.g. running "convert" and "identify" on the command line should output imageMagick command line help.
-
+e.g. running "convert" and "identify" on the command line should output imageMagick command line help (if you are on Windows and install imageMagick 7.x then make sure to install ["legacy utilities"](https://github.com/aheckmann/gm/issues/559)).
 
 If you create your own template you can generate the needed "thumbnails"/"block thumbnails" by running:
 ```
