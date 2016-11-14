@@ -4,6 +4,8 @@ var path = require('path');
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.initConfig({
 
@@ -228,12 +230,49 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      options: {
+        process: true,
+        separator: ';\n',
+        force: true,
+      },
+      js: {
+        src: [
+          "dist/vendor/jquery.min.js",
+          "dist/vendor/knockout.js",
+          "dist/vendor/jquery-ui.min.js",
+          "dist/vendor/jquery.ui.touch-punch.min.js",
+          "dist/vendor/load-image.all.min.js",
+          "dist/vendor/canvas-to-blob.min.js",
+          "dist/vendor/jquery.iframe-transport.js",
+          "dist/vendor/jquery.fileupload.js",
+          "dist/vendor/jquery.fileupload-process.js",
+          "dist/vendor/jquery.fileupload-image.js",
+          "dist/vendor/jquery.fileupload-validate.js",
+          "dist/vendor/knockout-jqueryui.min.js",
+          "bower_component/evol-colorpicker/js/evol.colorpicker.min.js",
+          "dist/vendor/tinymce.min.js",
+          "dist/mosaico.min.js",
+          // "dist/editor.js", can't find this file here
+        ],
+        dest: 'dist/mosaico.concat.js',
+      },
+    },
+
+    uglify: {
+      requirejs: {
+        src:  'dist/mosaico.concat.js',
+        dest: 'dist/mosaico.concat.min.js'
+      }
+    },
+
+
   });
 
   grunt.registerTask('js', ['combineKOTemplates', 'browserify', 'exorcise']);
   grunt.registerTask('css', ['less', 'postcss']);
   grunt.registerTask('server', ['express', 'watch', 'express-keepalive']);
-  grunt.registerTask('build', ['bowercopy', 'copy', 'jshint', 'js', 'css']);
+  grunt.registerTask('build', ['bowercopy', 'copy', 'jshint', 'js', 'css', 'concat', 'uglify']);
   grunt.registerTask('default', ['build', 'server']);
   grunt.registerTask('test', ['jasmine_node']);
 };

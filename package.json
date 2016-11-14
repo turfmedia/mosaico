@@ -51,6 +51,8 @@
     "express": "4.14.0",
     "gm": "1.23.0",
     "grunt": "1.0.1",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-uglify": "2.0.0",
     "grunt-bowercopy": "1.2.4",
     "grunt-browserify": "5.0.0",
     "grunt-contrib-connect": "1.0.2",
